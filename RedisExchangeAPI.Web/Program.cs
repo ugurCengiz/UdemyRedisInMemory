@@ -18,15 +18,15 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-RedisService redisService;
+RedisService redisService = new RedisService(builder.Configuration);
 
-app.UseHttpsRedirection(); 
+app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
- 
+
 app.UseAuthorization();
-//redisService.Connect();
+redisService.Connect();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
